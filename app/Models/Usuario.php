@@ -7,5 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Usuario extends Model
 {
-    use HasFactory;
+    //Utiliza la tabla trabajadores, donde se almacena la informacion total
+    protected $table = 'trabajadores';
+    // use HasFactory;
 }

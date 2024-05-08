@@ -25,6 +25,7 @@ C:\Program Files\PostgreSQL\16\data
 root pswd: soporte
 puerto:5432
 ______________________________________________________________
+
 CREATE DATABASE captahuellas;
 CREATE USER huellero WITH PASSWORD 'soporte';
 GRANT ALL PRIVILEGES ON DATABASE captahuellas TO huellero;
@@ -171,3 +172,11 @@ class UsuarioController extends Controller
         return view('usuarios.index', compact('usuarios'));
     }
 }
+
+# Retazo https://laravel.com/docs/11.x/urls#urls-for-named-routes
+
+Route::get('/post/{post}', function (Post $post) {
+    // ...
+})->name('post.show');
+
+
