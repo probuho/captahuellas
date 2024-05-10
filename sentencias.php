@@ -197,3 +197,62 @@ pg_dump -U postgres -d captahuellas -h localhost -p 5432 -F c -f C:\respaldo_cap
 
 
 
+
+
+
+
+PS C:\xampp\htdocs\captahuellas> php artisan db:seed
+
+   INFO  Seeding database.  
+
+
+   Illuminate\Contracts\Container\BindingResolutionException 
+
+  Target class [Database\Seeders\UserSeeder] does not exist. 
+
+  at vendor\laravel\framework\src\Illuminate\Container\Container.php:906
+    902▕
+    903▕         try {
+    904▕             $reflector = new ReflectionClass($concrete);
+    905▕         } catch (ReflectionException $e) {
+  ➜ 906▕             throw new BindingResolutionException("Target class [$concrete] does not exist.", 0, $e);
+    907▕         }
+    908▕
+    909▕         // If the type is not instantiable, the developer is attempting to resolve
+    910▕         // an abstract type such as an Interface or Abstract Class and there is
+
+  1   vendor\laravel\framework\src\Illuminate\Container\Container.php:904
+      ReflectionException::("Class "Database\Seeders\UserSeeder" does not exist")
+
+  2   vendor\laravel\framework\src\Illuminate\Container\Container.php:904
+      ReflectionClass::__construct("Database\Seeders\UserSeeder")
+
+
+0000000000000000000000000000000000000000000000000000000000000000
+
+me podrias ayudar a solucionar el error que me retorna al configurar los seeders y el factory por favor
+
+PS C:\xampp\htdocs\captahuellas> php artisan db:seed
+
+INFO Seeding database.
+
+Database\Seeders\UsuarioSeeder ....................................................................................... RUNNING
+
+BadMethodCallException
+
+Call to undefined method App\Models\Usuario::factory()
+
+at vendor\laravel\framework\src\Illuminate\Support\Traits\ForwardsCalls.php:67 63▕ * @throws \BadMethodCallException 64▕ */ 65▕ protected static function throwBadMethodCallException($method) 66▕ { ➜ 67▕ throw new BadMethodCallException(sprintf( 68▕ 'Call to undefined method %s::%s()', static::class, $method 69▕ )); 70▕ } 71▕ }
+
+i Bad Method Call: Did you mean App\Models\Usuario::toArray() ?
+
+1 vendor\laravel\framework\src\Illuminate\Support\Traits\ForwardsCalls.php:36 Illuminate\Database\Eloquent\Model::throwBadMethodCallException("factory")
+
+2 vendor\laravel\framework\src\Illuminate\Database\Eloquent\Model.php:2340 Illuminate\Database\Eloquent\Model::forwardCallTo(Object(Illuminate\Database\Eloquent\Builder), "factory", [])
+
+PS C:\xampp\htdocs\captahuellas>0000000000000000000000000000000000000000000000000000000000000000
+
+
+
+
+
