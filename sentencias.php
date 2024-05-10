@@ -180,3 +180,20 @@ Route::get('/post/{post}', function (Post $post) {
 })->name('post.show');
 
 
+
+PS C:\WINDOWS\system32> pg_dump -U postgres -d captahuellas -h localhost -p 5432 -F c -f respaldo_captahuellas.backup
+Contraseña:
+pg_dump: error: la consulta falló: ERROR:  permiso denegado a la secuencia failed_jobs_id_seq
+pg_dump: detalle: La consulta era: SELECT last_value, is_called FROM public.failed_jobs_id_seq
+PS C:\WINDOWS\system32>
+
+
+pg_dump -U soporte -W -h localhost basename > basename.sql
+
+pg_dump -U usuario -W -h host basename > /ruta/al/directorio/basename.sql
+
+
+pg_dump -U postgres -d captahuellas -h localhost -p 5432 -F c -f C:\respaldo_captahuellas.backup
+
+
+

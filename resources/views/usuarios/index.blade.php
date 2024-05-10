@@ -7,6 +7,9 @@
 
         @foreach ($usuarios as $usuario)
             <h1>{{$usuario->id}}</h1>
+            <h1>{{$usuario->primer_nombre}}</h1>
+            <h1>{{$usuario->primer_apellido}}</h1>
+            <h1>{{$usuario->telefono}}</h1>
         @endforeach
 
     </div>
