@@ -252,7 +252,29 @@ i Bad Method Call: Did you mean App\Models\Usuario::toArray() ?
 
 PS C:\xampp\htdocs\captahuellas>0000000000000000000000000000000000000000000000000000000000000000
 
+{{-- <script>
+    $(function() {
+        $("#example1").DataTable({
+            "responsive": true,
+            "lengthChange": false,
+            "autoWidth": false,
+            "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+        }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+        $('#example2').DataTable({
+            "paging": true,
+            "lengthChange": false,
+            "searching": false,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+            "responsive": true,
+        });
+    });
+</script> --}}
 
+================================================================================
+
+Route::get('/miembros/create',[App\Http\Controllers\UsuarioController::class,'create']);
 
 
 

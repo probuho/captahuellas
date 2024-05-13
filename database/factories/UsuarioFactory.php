@@ -28,7 +28,7 @@ class UsuarioFactory extends Factory{
             'Direccion' => $faker->address,
             'telefono' => $faker->randomElement(['416', '426', '412', '414', '426']) . $faker->randomNumber(7),
             'email' => $faker->unique()->safeEmail,
-            'Gerencia General' => 'ejemplo 1',
+            'gerencia_general' => 'GGSTI',
             'Foto' => null,
             'fecha_ingreso' => $faker->dateTimeThisYear($max = 'now', $timezone = null),
         ];

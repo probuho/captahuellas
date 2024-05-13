@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Models\Usuario;
 
 // Route::get('/', function () {return view('index');}); ->middleware (middleware:'auth');;
 Route::middleware(['auth'])->get('/', function () {
@@ -13,11 +14,13 @@ Auth::routes(['register'=>false]);
 
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/usuarios', [App\Http\Controllers\UsuarioController::class, 'index']);
+Route::get('/usuarios', [App\Http\Controllers\UsuarioController::class, 'index'])->middleware(['auth']);
+Route::get('/miembros/create',[App\Http\Controllers\UsuarioController::class,'create'])->middleware(['auth']);
 
-// //Vista de todos los usuarios
+//Vista de todos los usuarios
 // Route::middleware(['auth'])->get('usuarios', function () {
-//     return view('usuarios.index');
+//     $usuarios = Usuario::all();
+//     return view('usuarios.index', compact('usuarios'));
 // });
 
 // Vista de creacion de usuarios
