@@ -1,81 +1,130 @@
 @extends('layouts.admin')
 @section('content')
-
-    <div class="content" style="margin-left: 20px"> 
+    <div class="d-flex justify-content-between align-items-center mb-3" style="margin-left: 20px">
         <h1>Agregar nuevo...</h1>
     </div>
     <div class="content" style="margin-left: 20px">
-        <div class="d-flex justify-content-between align-items-center mb-3">
-            <h1>Trabajadores...</h1>
-        </div>
-        <div class="card">
-            <div class="card-header">
-                <h3 class="card-title">Formulario de registro</h3>
-                <div class="card-tools">
-                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                        <i class="fas fa-minus"></i>
-                    </button>
+        <div class="row">
+            <div class="col-md-11">
+                <div class="card card-outline card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title"><b>Agregar nuevo trabajador</b></h3>
+                    </div>
+                    <form action="{{url('usuario')}}" method="post" enctype="multipart/form-data">
+                        @csrf
+                        <div class="row">
+                            <div class="card-body" style="...">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="">P00</label> <b>*</b>
+                                            <input type="number" name="p00" class="form-control" id="id" maxlength="6"
+                                                required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="">Primer Nombre</label> <b>*</b>
+                                            <input type="text" name="primer_nombre" id="primer_nombre" maxlength="50"
+                                                required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="">Segundo Nombre</label>
+                                            <input type="text" name="segundo_nombre" class="form-control" id="segundo_nombre">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="">Primer Apellido</label> <b>*</b>
+                                            <input type="text" name="primer_apellido" class="form-control" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="">Segundo Apellido</label>
+                                            <input type="text" name="segundo_apellido" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="">Dirección</label>
+                                            <input type="text" name="Direccion" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="">Telefono</label> <b>*</b>
+                                            <input type="tel" name="telefono" class="form-control" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="">Correo</label>
+                                            <input type="email" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="">Correo laboral</label> <b>*</b>
+                                            <input type="email" name="correo_corporativo" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="">Huella dactilar</label>
+                                            <input type="file" name="huella_dactilar" class="form-control">
+                                            <center><output id="list"></output></center><br>
+                                            <script>
+                                                function archivo(evt) {
+                                                    var files = evt.target.files;
+                                                    //obtenemos la imagen del campo "file".
+                                                    for (var i = 0, f; f = files[i]; i++) {
+                                                        //solo admitimos imagenes.
+                                                        if (!f.type.match('image.*')) {
+                                                            continue;
+                                                        }
+                                                        var reader = new FileReader();
+                                                        reader.onload = (function(theFile) {
+                                                            return function(e) {
+                                                                //insertamos la imagen
+                                                                document.getElementById("list").innerHTML = ['<img class="thumb thumbnail" src="', e
+                                                                    .target.result, '"width="50%" title="', escape(theFile.name), '"/>'
+                                                                ].join('');
+                                                            };
+                                                        })(f);
+                                                        reader.readAsDataURL(f);
+                                                    }
+
+                                                }
+                                                document.getElementById('file').addEventListener('change', archivo, false);
+                                            </script>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="">Fecha de registro</label>
+                                            <input type="date" name="fecha_ingreso" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <a href="" class="btn btn-secondary">Cancelar</a>
+                                            <button type="submit" class="btn btn-primary">Guardar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
                 </div>
-            </div>
-            <div class="card-body">
-                
-                @push('scripts')
-                    <script>
-                        $(function() {
-                            $("#example1").DataTable({
-                                "pageLength": 10,
-                                "language": {
-                                    "emptyTable": "No hay información",
-                                    "info": "Pagina _START_ a _END_ de _TOTAL_ Usuarios",
-                                    "infoEmpty": "Mostrando 0 a 0 de 0 usuarios",
-                                    "infoFiltered": "(Filtrado de _MAX_ total usuarios)",
-                                    "infoPostFix": "",
-                                    "thousands": ",",
-                                    "lengthMenu": "Mostrar _MENU_ usuarios registrados",
-                                    "loadingRecords": "Cargando...",
-                                    "processing": "Procesando...",
-                                    "search": "Buscador:",
-                                    "zeroRecords": "Sin resultados encontrados",
-                                    "paginate": {
-                                        "first": "Primero",
-                                        "last": "Ultimo",
-                                        "next": "Siguiente",
-                                        "previous": "Anterior"
-                                    }
-                                },
-                                "responsive": true,
-                                "lengthChange": true,
-                                "autoWidth": false,
-                                buttons: [{
-                                        extend: 'collection',
-                                        text: 'Reportes',
-                                        orientation: 'landscape',
-                                        buttons: [{
-                                            text: 'Copiar',
-                                            extend: 'copy',
-                                        }, {
-                                            extend: 'pdf'
-                                        }, {
-                                            extend: 'csv'
-                                        }, {
-                                            extend: 'excel'
-                                        }, {
-                                            text: 'Imprimir',
-                                            extend: 'print'
-                                        }]
-                                    },
-                                    {
-                                        extend: 'colvis',
-                                        text: 'Visor de columnas',
-                                        collectionLayout: 'fixed three-column'
-                                    }
-                                ],
-                            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-                        });
-                    </script>
-                @endpush
             </div>
         </div>
     </div>
-
+    </div>
+    </div>
 @endsection()

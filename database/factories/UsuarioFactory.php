@@ -23,13 +23,18 @@ class UsuarioFactory extends Factory{
 
         return [
             'id' => $faker->randomNumber(6),
+            'p00' => $faker->randomNumber(6, true),
             'primer_nombre' => $faker->firstName,
+            'segundo_nombre' => $faker->firstName,
             'primer_apellido' => $faker->lastName,
+            'segundo_apellido' => $faker->lastName,
             'Direccion' => $faker->address,
             'telefono' => $faker->randomElement(['416', '426', '412', '414', '426']) . $faker->randomNumber(7),
             'email' => $faker->unique()->safeEmail,
+            'correo_corporativo' => $faker->firstName . '.' . $faker->lastName . '@movilnet.com.ve',
             'gerencia_general' => 'GGSTI',
             'Foto' => null,
+            'huella_dactilar' => null,
             'fecha_ingreso' => $faker->dateTimeThisYear($max = 'now', $timezone = null),
         ];
     }

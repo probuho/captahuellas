@@ -13,6 +13,15 @@ class UsuarioController extends Controller
         $usuarios = Usuario::all();
         return view('usuarios.index', compact('usuarios'));
     }
+    public function create(){
+        return view('usuario.create');
+    }
+    public function store(Request $request)
+    {
+        $usuario = request()->all();
+        return response()->json( $usuario );
+    }    
+
 }
 
 
