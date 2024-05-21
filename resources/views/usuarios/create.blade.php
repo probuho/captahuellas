@@ -10,72 +10,71 @@
                     <div class="card-header">
                         <h3 class="card-title"><b>Agregar nuevo trabajador</b></h3>
                     </div>
-                    <form action="{{url('usuario')}}" method="post" enctype="multipart/form-data">
+                    <form method="post" action="{{url('usuario')}}" enctype="multipart/form-data">
                         @csrf
                         <div class="row">
                             <div class="card-body" style="...">
                                 <div class="row">
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <label for="">P00</label> <b>*</b>
+                                            <label for="p00">P00</label> <b>*</b>
                                             <input type="number" name="p00" class="form-control" id="id" maxlength="6"
                                                 required>
                                         </div>
                                     </div>
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <label for="">Primer Nombre</label> <b>*</b>
-                                            <input type="text" name="primer_nombre" id="primer_nombre" maxlength="50"
-                                                required>
+                                            <label for="primer_nombre">Primer Nombre</label> <b>*</b>
+                                            <input type="text" name="primer_nombre" id="primer_nombre" maxlength="50" required>
                                         </div>
                                     </div>
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <label for="">Segundo Nombre</label>
+                                            <label for="segundo_nombre">Segundo Nombre</label>
                                             <input type="text" name="segundo_nombre" class="form-control" id="segundo_nombre">
                                         </div>
                                     </div>
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <label for="">Primer Apellido</label> <b>*</b>
+                                            <label for="primer_apellido">Primer Apellido</label> <b>*</b>
                                             <input type="text" name="primer_apellido" class="form-control" required>
                                         </div>
                                     </div>
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <label for="">Segundo Apellido</label>
+                                            <label for="segundo_apellido">Segundo Apellido</label>
                                             <input type="text" name="segundo_apellido" class="form-control">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="">Dirección</label>
+                                            <label for="Direccion">Dirección</label>
                                             <input type="text" name="Direccion" class="form-control">
                                         </div>
                                     </div>
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <label for="">Telefono</label> <b>*</b>
+                                            <label for="telefono">Telefono</label> <b>*</b>
                                             <input type="tel" name="telefono" class="form-control" required>
                                         </div>
                                     </div>
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <label for="">Correo</label>
-                                            <input type="email" class="form-control">
+                                            <label for="correo">Correo</label>
+                                            <input type="email" name="correo" class="form-control">
                                         </div>
                                     </div>
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <label for="">Correo laboral</label> <b>*</b>
+                                            <label for="correo_corporativo">Correo laboral</label> <b>*</b>
                                             <input type="email" name="correo_corporativo" class="form-control">
                                         </div>
                                     </div>
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <label for="">Huella dactilar</label>
-                                            <input type="file" name="huella_dactilar" class="form-control">
-                                            <center><output id="list"></output></center><br>
+                                            <label for="huella_dactilar">Huella dactilar</label>
+                                            <input id="file" type="file" name="huella_dactilar" class="form-control">
+                                            {{-- <center><output id="list"></output></center><br>
                                             <script>
                                                 function archivo(evt) {
                                                     var files = evt.target.files;
@@ -99,12 +98,12 @@
 
                                                 }
                                                 document.getElementById('file').addEventListener('change', archivo, false);
-                                            </script>
+                                            </script> --}}
                                         </div>
                                     </div>
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <label for="">Fecha de registro</label>
+                                            <label for="fecha_ingreso">Fecha de registro</label>
                                             <input type="date" name="fecha_ingreso" class="form-control">
                                         </div>
                                     </div>

@@ -76,7 +76,7 @@
                                 },
                                 "responsive": true,
                                 "lengthChange": true,
-                                "autoWidth": false,
+                                "autoWidth": true,
                                 buttons: [{
                                         extend: 'collection',
                                         text: 'Reportes',

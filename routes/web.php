@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UsuarioController;
 use App\Models\Usuario;
 
 // Route::get('/', function () {return view('index');}); ->middleware (middleware:'auth');;
@@ -14,9 +15,10 @@ Auth::routes(['register'=>false]);
 
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/usuarios', [App\Http\Controllers\UsuarioController::class, 'index'])->middleware(['auth']);
-Route::get('/usuarios/create',[App\Http\Controllers\UsuarioController::class,'create'])->middleware(['auth']);
-Route::resource('/usuarios',\App\Http\Controllers\UsuarioController::class);
+// Route::get('/usuarios', [App\Http\Controllers\UsuarioController::class, 'index'])->middleware(['auth']);
+// Route::get('/usuarios/create',[App\Http\Controllers\UsuarioController::class,'create'])->middleware(['auth']);
+Route::resource('/usuarios',UsuarioController::class)->middleware(['auth']);
+Route::post('/usuario', [UsuarioController::class, 'store'])->middleware(['auth']);
 
 //Vista de todos los usuarios
 // Route::middleware(['auth'])->get('usuarios', function () {
