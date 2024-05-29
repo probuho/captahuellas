@@ -15,10 +15,14 @@ Auth::routes(['register'=>false]);
 
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-// Route::get('/usuarios', [App\Http\Controllers\UsuarioController::class, 'index'])->middleware(['auth']);
-// Route::get('/usuarios/create',[App\Http\Controllers\UsuarioController::class,'create'])->middleware(['auth']);
+Route::get('/usuarios', [App\Http\Controllers\UsuarioController::class, 'index'])->middleware(['auth']);
+Route::get('/usuarios/create',[App\Http\Controllers\UsuarioController::class,'create'])->middleware(['auth']);
 Route::resource('/usuarios',UsuarioController::class)->middleware(['auth']);
-Route::post('/usuario', [UsuarioController::class, 'store'])->middleware(['auth']);
+//Route::post('/usuario', [UsuarioController::class, 'store'])->middleware(['auth']);
+//Route::get('/usuarios/create', [UsuarioController::class, 'create'])->name('usuarios.create')->middleware('auth');
+//Route::post('/usuarios', [UsuarioController::class, 'store'])->name('usuarios.store')->middleware('auth');
+Route::match(['get', 'post'], '/usuario', [App\Http\Controllers\UsuarioController::class, 'store']);
+
 
 //Vista de todos los usuarios
 // Route::middleware(['auth'])->get('usuarios', function () {

@@ -18,8 +18,8 @@ return new class extends Migration
             $table->string('Direccion',length:255);
             $table->string('telefono',length:8);
             $table->string('email',length:255)->unique();
-            $table->string('Gerencia General',length:255);
-            $table->binary('Foto')->nullable();
+            $table->string('gerencia_general',length:255);
+            $table->binary('foto')->nullable();
             $table->timestamp('fecha_ingreso')->nullable();
             $table->string('p00',length:6);
             $table->string('segundo_nombre',length:200);
