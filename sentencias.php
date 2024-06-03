@@ -1214,8 +1214,13 @@ Abre una terminal, navega al directorio de tu proyecto y ejecuta los siguientes 
 
 git add database/backups/captahuellas_backup.tar
 git commit -m "Agregado respaldo de la base de datos"
-Subir el cambio al repositorio remoto: Finalmente, sube los cambios al repositorio remoto para que otros puedan acceder al respaldo de la base de datos:
+
+Subir el cambio al repositorio remoto: 
+
+Finalmente, sube los cambios al repositorio remoto para que otros puedan acceder al respaldo de la base de datos:
+
 git push origin main
+
 Recuerda que subir respaldos de bases de datos a repositorios públicos puede exponer información sensible. Siempre asegúrate de que el respaldo no contenga información 
 privada o sensible antes de subirlo, o considera mantener el repositorio en modo privado.
 
@@ -1285,5 +1290,471 @@ ALTER USER huellero WITH SUPERUSER;
 Después de realizar el backup, puedes revocar el permiso de superusuario si lo consideras necesario:
 
 ALTER USER huellero WITH NOSUPERUSER;
+
 Recuerda que otorgar permisos de superusuario implica riesgos de seguridad, por lo que debe hacerse solo en contextos controlados y por un tiempo limitado 
 necesario para realizar tareas específicas como backups.
+
+=============================================================================================================
+
+
+tengo una idea pero quiero saber como pudiera hacerse
+
+public function store(Request $request) { $usuario = new Usuario($request->all()); return response() -> json($usuario); 
+//return redirect()->route('usuarios.index');
+
+}
+
+// $usuario -> fotografia = $request->file('foto')->store('foto_usuarios','public');
+al momento de recibir todo el $request del formulario me gustaria que si se inserta una imagen o una huella dactilar la registre como 
+tal como lo que es un archivo jpg o un archivo de huella digital.
+
+Para lograr lo que deseas, es decir, guardar una imagen o un archivo de huella digital que se recibe a través de un formulario, puedes seguir 
+los siguientes pasos en tu método store dentro del controlador. Primero, asegúrate de que tu formulario HTML tenga el atributo 
+enctype="multipart/form-data" para poder enviar archivos. Luego, en tu método store, puedes verificar si el request contiene un
+archivo y guardarlo en el sistema de archivos de Laravel utilizando el Storage Facade. Aquí te dejo un ejemplo de cómo podrías hacerlo:
+
+public function store(Request $request)
+
+{
+    // Crear una nueva instancia de Usuario con los datos del request excepto el archivo
+    $usuario = new Usuario($request->except(['foto']));
+
+    // Verificar si el request contiene un archivo con el nombre 'foto'
+    if ($request->hasFile('foto')) {
+        // Guardar el archivo en el disco 'public' dentro de una carpeta 'foto_usuarios'
+        // y obtener el nombre del archivo guardado
+        $path = $request->file('foto')->store('foto_usuarios', 'public');
+
+        // Guardar el path del archivo en el atributo correspondiente del usuario
+        $usuario->fotografia = $path;
+    }
+
+    // Guardar el usuario en la base de datos
+    $usuario->save();
+
+    // Opcionalmente, puedes retornar una respuesta, por ejemplo, redirigir al index de usuarios
+    // o retornar un JSON con los datos del usuario
+    return redirect()->route('usuarios.index');
+    // O retornar un JSON
+    // return response()->json($usuario);
+}
+Asegúrate de que el modelo Usuario tenga el atributo fotografia (o el nombre que hayas elegido para el campo donde se guarda la ruta 
+del archivo) en su propiedad $fillable para que puedas asignarle un valor masivamente:
+
+class Usuario extends Model
+{
+    use HasFactory;
+
+    protected $fillable = [
+        // Asegúrate de incluir todos los campos que quieres asignar masivamente
+        'nombre', 'apellido', 'email', 'fotografia',
+        // otros campos...
+    ];
+}
+Este código asume que tienes un campo en tu formulario HTML llamado foto que es donde el usuario sube el archivo de la imagen o huella 
+digital. También asume que tienes configurado correctamente el sistema de archivos de Laravel para usar el disco public, lo cual 
+puedes verificar y configurar en el archivo config/filesystems.php.
+
+==========================================================================================================================
+
+Hola buenos dias tengo una duda se supone que al agregar un nuevo trabajador en el formulario luego de llenar los datos requeridos para que 
+envie los datos al controlador y luego queden guardados en BD . antes de poder hacer todo ese proceso. deberia poder verse una vista en 
+miniatura del archivo que se esta cargando en el formulario podrias decirme porque no se visualiza.
+al colocar la consola despues de subir el archivo me muestra esto pero no estoy seguro de si esta relacionado con el error que te estoy 
+comentando arriba:
+
+Uncaught TypeError: Cannot read properties of null (reading 'addEventListener') at create:293:80
+
+El error que mencionas, Uncaught TypeError: Cannot read properties of null (reading 'addEventListener'), sugiere que el código JavaScript 
+está intentando añadir un eventListener a un elemento del DOM que no existe o no ha sido encontrado. Esto puede ocurrir si intentas 
+acceder al elemento antes de que el DOM esté completamente cargado o si el selector utilizado para encontrar el elemento no coincide 
+con ningún elemento en tu página.
+
+Para solucionar este problema y permitir la visualización de una vista en miniatura del archivo que se está cargando en el formulario, 
+debes asegurarte de que:
+
+El código JavaScript que añade el eventListener se ejecute después de que el DOM esté completamente cargado. Esto se puede lograr 
+colocando tu script al final del cuerpo del documento HTML o utilizando document.addEventListener('DOMContentLoaded', function() 
+{ /* tu código aquí */ }); para asegurar que tu código se ejecute después de que el DOM esté listo.
+
+El selector utilizado para encontrar el elemento al que quieres añadir el eventListener sea correcto y coincida con un elemento 
+existente en tu página.
+
+Aquí tienes un ejemplo básico de cómo puedes mostrar una vista en miniatura de un archivo de imagen seleccionado para cargar 
+en un formulario:
+
+<!-- Asegúrate de que el input y el contenedor de la vista previa existan en tu formulario -->
+
+<input type="file" id="fileInput" accept="image/*">
+<div id="previewContainer"></div>
+document.addEventListener('DOMContentLoaded', function() {
+    var fileInput = document.getElementById('fileInput');
+    var previewContainer = document.getElementById('previewContainer');
+
+    fileInput.addEventListener('change', function(e) {
+        var file = e.target.files[0];
+        if (file) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                var img = document.createElement('img');
+                img.src = e.target.result;
+                // Limpia el contenedor de vista previa antes de añadir la nueva imagen
+                previewContainer.innerHTML = '';
+                previewContainer.appendChild(img);
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+});
+Este código espera que tengas un <input> de tipo file con el ID fileInput y un contenedor con el ID previewContainer donde se mostrará 
+la vista en miniatura de la imagen seleccionada. Asegúrate de que estos elementos existan en tu formulario y que sus IDs coincidan con 
+los utilizados en el script.
+
+==========================================================================================================================
+
+en la consola de chrome me esta retornando el siguiente problema podrias por favor ayudarme a corregirlo
+
+Incorrect use of <label for=FORM_ELEMENT>
+The label's for attribute refers to a form field by its name, not its id. This might prevent the browser from correctly autofilling the form and accessibility tools from working correctly.
+To fix this issue, refer to form fields by their id attribute.
+7 recursos
+Label (Linea en Create.blade.php <label for="p00">P00</label>)
+Label (Linea en Create.blade.php <label for="primer_apellido">Primer Apellido</label>)
+Label (Linea en Create.blade.php <label for="segundo_apellido">Segundo Apellido</label>)
+Label (Linea en Create.blade.php <label for="Direccion">Dirección</label>)
+Label (Linea en Create.blade.php <label for="telefono">Telefono</label>)
+Label (Linea en Create.blade.php <label for="correo">Correo</label>)
+Label (Linea en Create.blade.php <label for="correo_corporativo">Correo laboral</label>)
+Más información: HTML Standard
+
+==========================================================================================================================
+
+disculpa la molestia podrias decirme en que archivos deberia insertar el codigo que me sugieres por favor
+
+Para integrar el código sugerido en el Sistema Captahuellas, debes considerar el propósito del código y en qué parte del sistema deseas 
+que se ejecute o se muestre. A continuación, te indico dónde podrías insertar diferentes tipos de código basado en la estructura y los 
+archivos del proyecto:
+
+Código de Frontend (HTML, CSS, JavaScript):
+
+HTML y Blade Templates: Si deseas agregar o modificar el contenido HTML, como formularios o estructuras de página, deberías hacerlo en 
+los archivos Blade dentro de la carpeta resources/views. Por ejemplo, si deseas agregar un nuevo formulario para usuarios, podrías 
+modificar o crear un archivo Blade en resources/views/usuarios/, como se muestra en create.blade.php.
+JavaScript: Para agregar funcionalidades interactivas o integrar plugins de JavaScript, puedes hacerlo en los archivos dentro de 
+public/js o directamente en los archivos Blade que requieran el script. Si el código JavaScript es específico para una página, puedes 
+incluirlo al final del archivo Blade correspondiente dentro de una sección de scripts.
+
+CSS: Los estilos específicos pueden agregarse en los archivos CSS dentro de public/css o en la sección de estilos de un archivo Blade 
+si son estilos específicos de una página.
+
+Código de Backend (PHP, Laravel):
+
+Controladores: Si estás agregando lógica de negocio o manejando la entrada de datos, deberías hacerlo en los controladores dentro de 
+app/Http/Controllers. Por ejemplo, si estás manejando la creación de usuarios, podrías modificar UsuarioController, como se muestra 
+en el retazo del controlador.
+Modelos: Para modificar la estructura de datos o las relaciones entre modelos, deberías editar los archivos en app/Models.
+Rutas: Si necesitas definir nuevas rutas para tu aplicación, deberías hacerlo en los archivos dentro de routes, como web.php para rutas web.
+
+Configuración y Variables de Entorno:
+
+Si estás configurando la conexión a la base de datos o variables de entorno, deberías editar el archivo .env en la raíz del proyecto y, 
+si es necesario, modificar los archivos de configuración correspondientes en config.
+Migraciones y Base de Datos:
+
+Para modificar la estructura de la base de datos, puedes crear nuevas migraciones usando el comando de Artisan php artisan make:migration 
+y luego modificar el archivo de migración generado en database/migrations. Recuerda que después de hacer cambios en el código, 
+especialmente en el lado del servidor o en archivos de configuración, puede ser necesario reiniciar el servidor de desarrollo para 
+que los cambios tengan efecto. También, si trabajas con compilación de assets (CSS/JS), asegúrate de ejecutar los comandos necesarios 
+como npm run dev para compilar los cambios.
+
+==========================================================================================================================
+
+en la consola de chrome me esta retornando el siguiente problema podrias por favor ayudarme a corregirlo
+
+Incorrect use of <label for=FORM_ELEMENT> The label's for attribute refers to a form field by its name, not its id. This might prevent 
+the browser from correctly autofilling the form and accessibility tools from working correctly. To fix this issue, refer to form fields 
+by their id attribute. 7 recursos Label (Linea en Create.blade.php <label for="p00">P00</label>) Label (Linea en Create.blade.php <label 
+for="primer_apellido">Primer Apellido</label>) Label (Linea en Create.blade.php <label for="segundo_apellido">Segundo Apellido</label>) 
+Label (Linea en Create.blade.php <label for="Direccion">Dirección</label>) Label (Linea en Create.blade.php <label for="telefono">
+Telefono</label>) Label (Linea en Create.blade.php <label for="correo">Correo</label>) Label (Linea en Create.blade.php <label for=
+correo_corporativo">Correo laboral</label>) Más información: HTML Standard
+
+Para corregir el problema indicado por la consola de Chrome, debes asegurarte de que el atributo for en las etiquetas <label> coincida 
+con el atributo id de los elementos de formulario (<input>, <select>, <textarea>, etc.) a los que hacen referencia. Esto es importante 
+tanto para la accesibilidad como para la funcionalidad de autocompletado del navegador.
+
+A continuación, te muestro cómo deberías modificar el código en tu archivo create.blade.php para corregir los problemas señalados:
+
+<!-- Asumiendo que tienes un campo de formulario para P00 --> ✅
+<label for="p00">P00</label>
+<input id="p00" name="p00" type="text" class="form-control">
+
+<!-- Para el primer apellido --> ✅
+<label for="primer_apellido">Primer Apellido</label>
+<input id="primer_apellido" name="primer_apellido" type="text" class="form-control">
+
+<!-- Para el segundo apellido -->
+<label for="segundo_apellido">Segundo Apellido</label>
+<input id="segundo_apellido" name="segundo_apellido" type="text" class="form-control">
+
+<!-- Para la dirección -->
+<label for="direccion">Dirección</label>
+<input id="direccion" name="direccion" type="text" class="form-control">
+
+<!-- Para el teléfono -->
+<label for="telefono">Telefono</label>
+<input id="telefono" name="telefono" type="tel" class="form-control">
+
+<!-- Para el correo -->
+<label for="correo">Correo</label>
+<input id="correo" name="correo" type="email" class="form-control">
+
+<!-- Para el correo corporativo -->
+<label for="correo_corporativo">Correo laboral</label>
+<input id="correo_corporativo" name="correo_corporativo" type="email" class="form-control">
+
+Asegúrate de que cada <input> (o cualquier otro elemento de formulario relevante) tenga un atributo id que coincida exactamente con el valor del atributo for de su 
+correspondiente <label>. Esto garantizará que los clics en la etiqueta enfoquen correctamente el campo de formulario asociado y que las herramientas de accesibilidad 
+funcionen como se espera.
+
+==========================================================================================================================
+Para asegurarte de que los campos de texto solo acepten caracteres alfabéticos y los campos numéricos solo acepten dígitos, puedes utilizar validaciones en el lado del cliente utilizando JavaScript. Aquí te muestro cómo puedes implementarlo:
+
+### Validación de Campos de Texto (Solo Letras)
+Para permitir solo caracteres alfabéticos en los campos de texto, puedes utilizar expresiones regulares. Agrega el siguiente código JavaScript dentro de la sección `<script>` de tu formulario:
+
+```javascript
+
+##############################################################
+
+function validarTexto(event) {
+  var input = event.target;
+  var regex = /^[a-zA-Z]+$/; // Expresión regular para permitir solo letras
+  if (!regex.test(input.value)) {
+    input.value = input.value.replace(/[^a-zA-Z]+/, ''); // Elimina caracteres no válidos
+  }
+}
+
+##############################
+
+// Función para validar campos de texto
+function validarTexto(event) {
+  var input = event.target;
+  var regex = /^[a-zA-Z\s]+$/; // Expresión regular para permitir solo letras y espacios
+  if (!regex.test(input.value)) {
+    input.value = input.value.replace(/[^a-zA-Z\s]+/, ''); // Elimina caracteres no válidos
+  }
+}
+
+// Agrega el evento 'input' a los campos de texto
+var camposTexto = document.querySelectorAll('input[type="text"]');
+camposTexto.forEach(function(campo) {
+  campo.addEventListener('input', validarTexto);
+});
+```
+
+Este código define una función `validarTexto` que utiliza una expresión regular para permitir solo letras y espacios en blanco. Luego, agrega el evento `input` a todos los 
+campos de texto del formulario para que se ejecute la función cada vez que se ingrese un carácter.
+
+### Validación de Campos Numéricos (Solo Dígitos)
+Para permitir solo dígitos en los campos numéricos, puedes utilizar el tipo de entrada `number` en los campos correspondientes. Además, puedes agregar el atributo 
+`pattern` para especificar una expresión regular que valide el formato deseado. Por ejemplo:
+
+```html
+<input type="number" name="p00" class="form-control" id="p00" maxlength="6" pattern="[0-9]*" required>
+```
+
+En este ejemplo, el atributo `pattern="[1][2]*"` asegura que solo se permitan dígitos del 0 al 9 en el campo `p00`.
+
+Al aplicar estas validaciones, tu formulario solo aceptará caracteres alfabéticos en los campos de texto y dígitos en los campos numéricos, evitando la entrada de 
+símbolos, caracteres especiales o combinaciones no deseadas.
+
+Recuerda que estas validaciones se realizan en el lado del cliente y pueden ser evadidas si no se implementan también en el servidor. Asegúrate de validar los datos 
+en el servidor antes de procesarlos para garantizar la integridad y seguridad de los datos.
+
+Citations:
+[1] https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/10560326/7e1ad9e0-8569-430b-8e05-99d3bcbe5156/paste.txt
+[2] https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/10560326/8013a886-56db-40d3-984a-32af1bb5da65/paste.txt
+
+==========================================================================================================================
+
+estaba revisando en mi codigo y note que al insertar la imagen la vista previa que carga es demasiado grande para el formulario podriamos incluir en el script la logica para que al insertar la imagen se ajuste a un tamaño mas apropiado por favor
+
+<div class="col-md-3">
+    <div class="form-group">
+        <label for="foto">foto</label>
+        <input id="foto" type="file" name="foto" class="form-control"
+            accept="image/*">
+        <center><output id="list"></output></center>
+        <div id="previewContainer">
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    var foto = document.getElementById('foto');
+                    var previewContainer = document.getElementById('previewContainer');
+                    foto.addEventListener('change', function(e) {
+                        var file = e.target.files[0];
+                        if (file) {
+                            var reader = new FileReader();
+                            reader.onload = function(e) {
+                                var img = document.createElement('img');
+                                img.src = e.target.result;
+                                // Limpia el contenedor de vista previa antes de añadir la nueva imagen
+                                previewContainer.innerHTML = '';
+                                previewContainer.appendChild(img);
+                            };
+                            reader.readAsDataURL(file);
+                        }
+                    });
+                });
+            </script>
+        </div>
+    </div>
+</div>
+
+# Respuesta [Retazo de codigo incluyendo ajuste de imagen]
+
+Respuesta
+Para ajustar el tamaño de la imagen de vista previa en el formulario, puedes modificar el script JavaScript que maneja la carga de la 
+imagen. Aquí te muestro cómo puedes hacerlo:
+
+javascript
+document.addEventListener('DOMContentLoaded', function() {
+    var foto = document.getElementById('foto');
+    var previewContainer = document.getElementById('previewContainer');
+    foto.addEventListener('change', function(e) {
+        var file = e.target.files[0];
+        if (file) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                var img = document.createElement('img');
+                img.src = e.target.result;
+                
+                // Ajusta el tamaño de la imagen
+                img.style.maxWidth = '100px'; // Ajusta el ancho máximo según tus necesidades
+                img.style.maxHeight = '100px'; // Ajusta el alto máximo según tus necesidades
+                
+                // Limpia el contenedor de vista previa antes de añadir la nueva imagen
+                previewContainer.innerHTML = '';
+                previewContainer.appendChild(img);
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+});
+
+En este código modificado, se agregan las siguientes líneas para ajustar el tamaño de la imagen de vista previa:
+
+javascript
+
+img.style.maxWidth = '100px'; // Ajusta el ancho máximo según tus necesidades
+img.style.maxHeight = '100px'; // Ajusta el alto máximo según tus necesidades
+
+Estos estilos en línea establecen el ancho y alto máximos de la imagen de vista previa a 100 píxeles cada uno. Puedes ajustar estos 
+valores según tus necesidades específicas para que la imagen se ajuste mejor al tamaño del formulario.
+Al aplicar estos cambios, la imagen de vista previa se mostrará con un tamaño más apropiado dentro del formulario, evitando que se vea 
+demasiado grande.
+
+Recuerda que este ajuste se realiza en el lado del cliente utilizando JavaScript. Si deseas aplicar un ajuste de tamaño más robusto, 
+también puedes considerar procesar la imagen en el servidor antes de almacenarla o mostrarla en el formulario.
+
+==========================================================================================================================
+
+Registro de cambio
+
+Para corregir el problema indicado por la consola de Chrome, debes asegurarte de que el atributo for en las etiquetas <label> coincida con el atributo id de los elementos de formulario (<input>, <select>, <textarea>, etc.) a los que hacen referencia. Esto es importante tanto para la accesibilidad como para la funcionalidad de autocompletado del navegador.
+A continuación, te muestro cómo deberías modificar el código en tu archivo create.blade.php para corregir los problemas señalados:
+
+<!-- Asumiendo que tienes un campo de formulario para P00 -->
+<label for="p00">P00</label> <input id="p00" name="p00" type="text" class="form-control">
+
+<!-- Para el primer apellido -->
+<label for="primer_apellido">Primer Apellido</label> <input id="primer_apellido" name="primer_apellido" type="text" class="form-control">
+
+<!-- Para el segundo apellido -->
+<label for="segundo_apellido">Segundo Apellido</label> <input id="segundo_apellido" name="segundo_apellido" type="text" class="form-control">
+
+<!-- Para la dirección -->
+<label for="direccion">Dirección</label> <input id="direccion" name="direccion" type="text" class="form-control">
+
+<!-- Para el teléfono -->
+<label for="telefono">Telefono</label> <input id="telefono" name="telefono" type="tel" class="form-control">
+
+<!-- Para el correo -->
+<label for="correo">Correo</label> <input id="correo" name="correo" type="email" class="form-control">
+
+<!-- Para el correo corporativo -->
+<label for="correo_corporativo">Correo laboral</label> <input id="correo_corporativo" name="correo_corporativo" type="email" class="form-control"> Asegúrate de que cada <input> (o cualquier otro elemento de formulario relevante) tenga un atributo id que coincida exactamente con el valor del atributo for de su correspondiente <label>. Esto garantizará que los clics en la etiqueta enfoquen correctamente el campo de formulario asociado y que las herramientas de accesibilidad funcionen como se espera.
+
+segun esta respuesta que me diste podria corregir los problemas en create.blade.php pero recuerda que tengo modificar igualmente todo lo que esta asociado con la recepsion del request y el envio a la base de datos podrias por favor generarme el codigo para modificar y corregir de manera en que siga funcionando con esta mejora que se aplico por favor
+
+Para implementar las correcciones en create.blade.php y asegurar que el envío de datos y la recepción en el backend funcionen correctamente con las mejoras aplicadas, necesitarás realizar algunos pasos adicionales. A continuación, te proporciono un ejemplo de cómo podrías modificar el código para manejar los datos del formulario en Laravel, incluyendo la recepción del request y el almacenamiento en la base de datos.
+
+Paso 1: Modificar create.blade.php
+Primero, asegúrate de que tu formulario en create.blade.php esté correctamente configurado para enviar los datos. Aquí tienes un ejemplo de cómo podría lucir tu formulario con los campos mencionados:
+
+@extends('layouts.admin')
+@section('content')
+
+<div class="content"> 
+    <h1>Agregar nuevo...</h1>
+    <form action="{{ route('usuarios.store') }}" method="POST">
+        @csrf
+        <label for="p00">P00</label>
+        <input id="p00" name="p00" type="text" class="form-control">
+
+        <label for="primer_apellido">Primer Apellido</label>
+        <input id="primer_apellido" name="primer_apellido" type="text" class="form-control">
+
+        <label for="segundo_apellido">Segundo Apellido</label>
+        <input id="segundo_apellido" name="segundo_apellido" type="text" class="form-control">
+
+        <label for="direccion">Dirección</label>
+        <input id="direccion" name="direccion" type="text" class="form-control">
+
+        <label for="telefono">Telefono</label>
+        <input id="telefono" name="telefono" type="tel" class="form-control">
+
+        <label for="correo">Correo</label>
+        <input id="correo" name="correo" type="email" class="form-control">
+
+        <label for="correo_corporativo">Correo laboral</label>
+        <input id="correo_corporativo" name="correo_corporativo" type="email" class="form-control">
+
+        <button type="submit" class="btn btn-primary">Guardar</button>
+    </form>
+</div>
+
+@endsection()
+Paso 2: Crear la ruta
+Asegúrate de tener una ruta definida en web.php para manejar el envío del formulario. Por ejemplo:
+
+Route::post('/usuarios', 'UsuarioController@store')->name('usuarios.store');
+Paso 3: Modificar el UsuarioController
+En tu UsuarioController, necesitarás un método store para manejar la recepción de los datos del formulario y guardarlos en la base de datos. Aquí tienes un ejemplo básico de cómo podría lucir:
+
+public function store(Request $request)
+{
+    $usuario = new Usuario();
+    $usuario->p00 = $request->input('p00');
+    $usuario->primer_apellido = $request->input('primer_apellido');
+    $usuario->segundo_apellido = $request->input('segundo_apellido');
+    $usuario->direccion = $request->input('direccion');
+    $usuario->telefono = $request->input('telefono');
+    $usuario->correo = $request->input('correo');
+    $usuario->correo_corporativo = $request->input('correo_corporativo');
+    
+    $usuario->save();
+
+    return redirect()->route('usuarios.index')->with('success', 'Usuario creado exitosamente');
+}
+Asegúrate de que el modelo Usuario esté correctamente configurado para aceptar asignaciones masivas de estos campos, estableciendo la propiedad $fillable en el modelo:
+
+class Usuario extends Model
+{
+    protected $fillable = ['p00', 'primer_apellido', 'segundo_apellido', 'direccion', 'telefono', 'correo', 'correo_corporativo'];
+}
+Con estos pasos, deberías ser capaz de recibir los datos del formulario en tu método store, procesarlos y almacenarlos en la base de datos, manteniendo la funcionalidad del sistema con las mejoras aplicadas en el formulario.
+
+==========================================================================================================================
+
+Registro de cambio
