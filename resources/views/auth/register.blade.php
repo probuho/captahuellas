@@ -1,6 +1,81 @@
 @extends('layouts.app')
 
+@extends('layouts.app')
+
 @section('content')
+    <section class="user">
+        <div class="user_options-container">
+            <div class="user_options-text">
+                <div class="user_options-unregistered">
+                    <h2 class="user_unregistered-title">¿No tienes una cuenta?</h2>
+                    <p class="user_unregistered-text">Recuerda la informacion de este sistema es sencible solo es permitido crear usuarios para supervisores y gerentes</p>
+                    <button class="user_unregistered-signup" id="signup-button">Regístrate</button>
+                </div>
+
+                <div class="user_options-registered">
+                    <h2 class="user_registered-title">¿Tienes una cuenta?</h2>
+                    <p class="user_registered-text">Banjo tote bag bicycle rights, High Life sartorial cray craft beer
+                        whatever street art fap.</p>
+                    <button class="user_registered-login" id="login-button">Iniciar sesión</button>
+                </div>
+            </div>
+
+            <div class="user_options-forms" id="user_options-forms">
+                <div class="user_forms-login">
+                    <h2 class="forms_title">Iniciar sesión</h2>
+                    <form method="POST" action="{{ route('login') }}" class="forms_form">
+                        @csrf
+                        <fieldset class="forms_fieldset">
+                            <div class="forms_field">
+                                <input type="email" name="email" placeholder="Correo electrónico"
+                                    class="forms_field-input" required autofocus />
+                            </div>
+                            <div class="forms_field">
+                                <input type="password" name="password" placeholder="Contraseña" class="forms_field-input"
+                                    required />
+                            </div>
+                        </fieldset>
+                        <div class="forms_buttons">
+                            @if (Route::has('password.request'))
+                                <button type="button" class="forms_buttons-forgot">
+                                    <a href="{{ route('password.request') }}">
+                                        {{ __('¿Olvidaste tu contraseña?') }}
+                                    </a>
+                                </button>
+                            @endif
+                            <input type="submit" value="Iniciar sesión" class="forms_buttons-action">
+                        </div>
+                    </form>
+                </div>
+                <div class="user_forms-signup">
+                    <h2 class="forms_title">Regístrate</h2>
+                    <form method="POST" action="{{ route('register') }}" class="forms_form">
+                        @csrf
+                        <fieldset class="forms_fieldset">
+                            <div class="forms_field">
+                                <input type="text" name="name" placeholder="Nombre completo" class="forms_field-input"
+                                    required />
+                            </div>
+                            <div class="forms_field">
+                                <input type="email" name="email" placeholder="Correo electrónico"
+                                    class="forms_field-input" required />
+                            </div>
+                            <div class="forms_field">
+                                <input type="password" name="password" placeholder="Contraseña" class="forms_field-input"
+                                    required />
+                            </div>
+                        </fieldset>
+                        <div class="forms_buttons">
+                            <input type="submit" value="Regístrate" class="forms_buttons-action">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+@endsection
+
+{{-- @section('content')
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -74,4 +149,4 @@
         </div>
     </div>
 </div>
-@endsection
+@endsection --}}

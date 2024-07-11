@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UsuarioController;
 use App\Models\Usuario;
+use Illuminate\Support\Facades\Auth;
 
 // Route::get('/', function () {return view('index');}); ->middleware (middleware:'auth');;
 Route::middleware(['auth'])->get('/', function () {
@@ -10,7 +11,8 @@ Route::middleware(['auth'])->get('/', function () {
 });
 
 // Se deshabilito la vista de register aqui
-Auth::routes(['register'=>false]);
+Auth::routes();
+Route::get('/ruta', 'ApprovedController@metodo');
 // Auth::routes(['register' => false]);
 
 
@@ -35,3 +37,9 @@ Route::post('/usuarios', 'UsuarioController@store')->name('usuarios.store');
 Route::middleware(['auth'])->get('usuarios/create', function () {
     return view('usuarios.create');
 });
+
+Route::middleware(['auth', 'approved'])->get('/', function () {
+    return view('index');
+});
+
+

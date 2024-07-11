@@ -1,0 +1,166 @@
+.user {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+    background: #ccc;
+    background-size: cover;
+}
+
+.user_options-container {
+    position: relative;
+    width: 80%;
+}
+
+.user_options-text {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    background-color: rgba(34, 34, 34, 0.85);
+    border-radius: 3px;
+}
+
+.user_options-registered,
+.user_options-unregistered {
+    width: 50%;
+    padding: 75px 45px;
+    color: #fff;
+    font-weight: 300;
+}
+
+.user_registered-title,
+.user_unregistered-title {
+    margin-bottom: 15px;
+    font-size: 1.66rem;
+    line-height: 1em;
+}
+
+.user_unregistered-text,
+.user_registered-text {
+    font-size: 0.83rem;
+    line-height: 1.4em;
+}
+
+.user_registered-login,
+.user_unregistered-signup {
+    margin-top: 30px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    padding: 10px 30px;
+    color: #fff;
+    text-transform: uppercase;
+    line-height: 1em;
+    letter-spacing: 0.2rem;
+    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+}
+
+.user_registered-login:hover,
+.user_unregistered-signup:hover {
+    color: rgba(34, 34, 34, 0.85);
+    background-color: #ccc;
+}
+
+.user_options-forms {
+    position: absolute;
+    top: 50%;
+    left: 30px;
+    width: calc(50% - 30px);
+    min-height: 420px;
+    background-color: #fff;
+    border-radius: 3px;
+    box-shadow: 2px 0 15px rgba(0, 0, 0, 0.25);
+    overflow: hidden;
+    transform: translate3d(100%, -50%, 0);
+    transition: transform 0.4s ease-in-out;
+}
+
+.user_forms-login,
+.user_forms-signup {
+    position: absolute;
+    top: 70px;
+    left: 40px;
+    width: calc(100% - 80px);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.4s ease-in-out, visibility 0.4s ease-in-out, transform 0.5s ease-in-out;
+}
+
+.user_forms-signup {
+    transform: translate3d(120px, 0, 0);
+}
+
+.forms_buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 35px;
+}
+
+.forms_buttons-forgot {
+    letter-spacing: 0.1rem;
+    color: #ccc;
+    text-decoration: underline;
+    transition: color 0.2s ease-in-out;
+}
+
+.forms_buttons-forgot:hover {
+    color: rgba(204, 204, 204, 0.9);
+}
+
+.forms_buttons-action {
+    background-color: #e8716d;
+    border-radius: 3px;
+    padding: 10px 35px;
+    font-size: 1rem;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 0.1rem;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.forms_buttons-action:hover {
+    background-color: darken(#e8716d, 10%);
+}
+
+.user_options-forms.bounceLeft {
+    animation: bounceLeft 1s forwards;
+}
+
+.user_forms-signup {
+    animation: showSignUp 1s forwards;
+}
+
+.user_forms-login {
+    opacity: 1;
+    visibility: visible;
+    transform: translate3d(0, 0, 0);
+}
+
+.user_options-forms.bounceRight {
+    animation: bounceRight 1s forwards;
+}
+
+@media screen and (max-width: 990px) {
+    .user_options-forms {
+        min-height: 350px;
+    }
+
+    .forms_buttons {
+        flex-direction: column;
+    }
+
+    .user_forms-login .forms_buttons-action {
+        margin-top: 30px;
+    }
+
+    .user_forms-signup,
+    .user_forms-login {
+        top: 40px;
+    }
+
+    .user_options-registered,
+    .user_options-unregistered {
+        padding: 50px 45px;
+    }
+}
