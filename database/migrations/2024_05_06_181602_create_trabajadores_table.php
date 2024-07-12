@@ -8,8 +8,8 @@ return new class extends Migration {
     /**
      * Run the migrations.
      */
-    // database/migrations/2024_05_06_181602_create_trabajadores_table.php
-    public function up()
+    
+    public function up(): void
     {
         Schema::create('trabajadores', function (Blueprint $table) {
             $table->id();
@@ -20,15 +20,16 @@ return new class extends Migration {
             $table->string('segundo_apellido')->nullable();
             $table->string('Direccion')->nullable();
             $table->string('telefono')->nullable();
-            $table->string('email')->unique();
+            $table->string('email')->nullable();
             $table->string('correo_corporativo')->nullable();
             $table->string('gerencia_general')->nullable();
-            $table->binary('Foto')->nullable(); // Asegúrate de que esta línea exista
+            $table->binary('Foto')->nullable(); // Verifica que esta línea exista
             $table->binary('huella_dactilar')->nullable();
-            $table->timestamp('fecha_ingreso')->nullable();
+            $table->date('fecha_ingreso')->nullable();
             $table->timestamps();
         });
     }
+
 
     /**
      * Reverse the migrations.

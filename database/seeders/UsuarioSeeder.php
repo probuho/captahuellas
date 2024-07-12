@@ -12,4 +12,6 @@ class UsuarioSeeder extends Seeder
     {
         UsuarioFactory::new()->count(80)->create();
     }
+
+    
 }
