@@ -1,89 +1,55 @@
 <?php
 
-namespace App\Providers;
+namespace App\Http\Controllers\Auth;
 
-use Illuminate\Support\Facades\Route;
-use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
+use App\Http\Controllers\Controller;
+use App\Providers\RouteServiceProvider;
+use App\Models\User;
+use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\Request;
 
-class RouteServiceProvider extends ServiceProvider
+class RegisterController extends Controller
 {
-    /**
-     * This namespace is applied to your controller routes.
-     *
-     * In addition, it is set as the URL generator's root namespace.
-     *
-     * @var string
-     */
-    protected $namespace = 'App\Http\Controllers';
+    use RegistersUsers;
 
-    /**
-     * The path to the "home" route for your application.
-     *
-     * This is used by Laravel authentication to redirect users after login.
-     *
-     * @var string
-     */
-    public const HOME = '/home';
+    protected $redirectTo = 'register'; // Redirigir a la vista de registro después del registro
 
-    /**
-     * Define your route model bindings, pattern filters, etc.
-     *
-     * @return void
-     */
-    public function boot()
+    public function __construct()
     {
-        //
-
-        parent::boot();
+        $this->middleware('guest');
     }
 
-    /**
-     * Define the routes for the application.
-     *
-     * @return void
-     */
-    public function map()
+    protected function validator(array $data)
     {
-        $this->mapApiRoutes();
-
-        $this->mapWebRoutes();
-
-        //
+        return Validator::make($data, [
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+        ]);
     }
 
-    /**
-     * Define the "web" routes for the application.
-     *
-     * These routes all receive session state, CSRF protection, etc.
-     *
-     * @return void
-     */
-    protected function mapWebRoutes()
+    protected function create(array $data)
     {
-        Route::middleware('web')
-             ->namespace($this->namespace)
-             ->group(base_path('routes/web.php'));
+        return User::create([
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'password' => Hash::make($data['password']),
+            'approved' => false, // Agregar un campo 'approved' en la tabla 'users'
+        ]);
     }
 
-    /**
-     * Define the "api" routes for the application.
-     *
-     * These routes are typically stateless.
-     *
-     * @return void
-     */
-    protected function mapApiRoutes()
+    protected function registered(Request $request, $user)
     {
-        Route::prefix('api')
-             ->middleware('api')
-             ->namespace($this->namespace)
-             ->group(base_path('routes/api.php'));
+        $user->approved = false;
+        $user->save();
+
+        return redirect($this->redirectPath())->with('status', 'Registro exitoso. Su cuenta está pendiente de aprobación.');
     }
 }
 
 
-// por si acaso
-
 // namespace App\Http\Controllers\Auth;
 
 // use App\Http\Controllers\Controller;
@@ -98,7 +64,7 @@ class RouteServiceProvider extends ServiceProvider
 // {
 //     use RegistersUsers;
 
-//     protected $redirectTo = RouteServiceProvider::HOME;
+//     protected $redirectTo = 'register';
 
 //     public function __construct()
 //     {
@@ -133,57 +99,10 @@ class RouteServiceProvider extends ServiceProvider
 //     }
 // }
 
+// namespace App\Providers;
 
-// namespace App\Http\Controllers\Auth;
-
-// use App\Http\Controllers\Controller;
-// use App\Providers\RouteServiceProvider;
-// use App\Models\User;
-// use Illuminate\Foundation\Auth\RegistersUsers;
-// use Illuminate\Support\Facades\Hash;
-// use Illuminate\Support\Facades\Validator;
-// use Illuminate\Http\Request;
-
-// class RegisterController extends Controller
-// {
-//     use RegistersUsers;
-
-//     protected $redirectTo = RouteServiceProvider::HOME;
-
-//     public function __construct()
-//     {
-//         $this->middleware('guest');
-//     }
-
-//     protected function validator(array $data)
-//     {
-//         return Validator::make($data, [
-//             'name' => ['required', 'string', 'max:255'],
-//             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-//             'password' => ['required', 'string', 'min:8', 'confirmed'],
-//         ]);
-//     }
-
-//     protected function create(array $data)
-//     {
-//         return User::create([
-//             'name' => $data['name'],
-//             'email' => $data['email'],
-//             'password' => Hash::make($data['password']),
-//             'approved' => false, // Agregar un campo 'approved' en la tabla 'users'
-//         ]);
-//     }
-
-//     protected function registered(Request $request, $user)
-//     {
-//         $user->approved = false;
-//         $user->save();
-
-//         return redirect($this->redirectPath())->with('status', 'Registro exitoso. Su cuenta está pendiente de aprobación.');
-//     }
-// }
-
-// Antiguo
+// use Illuminate\Support\Facades\Route;
+// use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 
 // class RegisterController extends Controller
 // {
@@ -204,7 +123,7 @@ class RouteServiceProvider extends ServiceProvider
 //      * Where to redirect users after registration.
 //      *
 //      * @var string
-//      */
+// //      */
 //     protected $redirectTo = '/home';
 
 //     /**
