@@ -11,21 +11,20 @@ class Usuario extends Model
     protected $table = 'trabajadores';
     use HasFactory;
     protected $fillable = [
-        'p00',
         'primer_nombre',
         'segundo_nombre',
         'primer_apellido',
         'segundo_apellido',
-        'direccion',
+        'Direccion',
         'telefono',
         'email',
         'gerencia_general',
         'foto',
         'fecha_ingreso',
+        'p00',
         'correo_corporativo',
         'huella_dactilar'
     ];
-    
 
 }
 

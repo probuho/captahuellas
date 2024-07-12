@@ -24,7 +24,6 @@ Route::resource('/usuarios',UsuarioController::class)->middleware(['auth']);
 //Route::get('/usuarios/create', [UsuarioController::class, 'create'])->name('usuarios.create')->middleware('auth');
 //Route::post('/usuarios', [UsuarioController::class, 'store'])->name('usuarios.store')->middleware('auth');
 Route::match(['get', 'post'], '/usuario', [App\Http\Controllers\UsuarioController::class, 'store']);
-Route::post('/usuarios', 'UsuarioController@store')->name('usuarios.store');
 
 
 //Vista de todos los usuarios
