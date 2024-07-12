@@ -4,30 +4,32 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
+    
     public function up(): void
     {
         Schema::create('trabajadores', function (Blueprint $table) {
             $table->id();
-            $table->string('primer_nombre',length:200);
-            $table->string('primer_apellido',length:200);
-            $table->string('Direccion',length:255);
-            $table->string('telefono',length:8)->unique();
-            $table->string('email',length:255)->unique();
-            $table->string('gerencia_general',length:255);
-            $table->binary('foto')->nullable();
-            $table->timestamp('fecha_ingreso')->nullable();
-            $table->string('p00',length:6)->unique();
-            $table->string('segundo_nombre',length:200);
-            $table->string('segundo_apellido',length:200);
-            $table->string('correo_corporativo',length:50);
+            $table->integer('p00');
+            $table->string('primer_nombre');
+            $table->string('segundo_nombre')->nullable();
+            $table->string('primer_apellido');
+            $table->string('segundo_apellido')->nullable();
+            $table->string('Direccion')->nullable();
+            $table->string('telefono')->nullable();
+            $table->string('email')->nullable();
+            $table->string('correo_corporativo')->nullable();
+            $table->string('gerencia_general')->nullable();
+            $table->binary('Foto')->nullable(); // Verifica que esta línea exista
             $table->binary('huella_dactilar')->nullable();
+            $table->date('fecha_ingreso')->nullable();
+            $table->timestamps();
         });
     }
+
 
     /**
      * Reverse the migrations.

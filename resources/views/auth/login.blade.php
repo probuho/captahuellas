@@ -1,4 +1,4 @@
-@extends('layouts.app')
+{{-- @extends('layouts.app')
 
 @section('content')
 <section class="user">
@@ -67,7 +67,7 @@
     </div>
 </section>
 
-@endsection
+@endsection --}}
 
 {{-- @section('content')
 <section class="user">
@@ -166,7 +166,7 @@
 </section>
 @endsection --}}
 
-<style>
+{{-- <style>
     .user {
         display: flex;
         justify-content: center;
@@ -402,12 +402,12 @@
         }, false);
     });
 
-</script>
+</script> --}}
 
 
 {{-- backup codigo --}}
 
-{{-- @extends('layouts.app')
+@extends('layouts.app')
 
 @section('content')
 <div class="container">
@@ -479,4 +479,4 @@
         </div>
     </div>
 </div>
-@endsection --}}
+@endsection
