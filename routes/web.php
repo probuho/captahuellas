@@ -12,10 +12,10 @@ Route::middleware(['auth'])->get('/', function () {
 
 // Se deshabilito la vista de register aqui
 Auth::routes();
-Route::get('/ruta', 'ApprovedController@metodo');
-// Auth::routes(['register' => false]);
+// Route::get('/ruta', 'ApprovedController@metodo');
+Auth::routes(['register' => false]);
 
-
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/usuarios', [App\Http\Controllers\UsuarioController::class, 'index'])->middleware(['auth']);
 Route::get('/usuarios/create',[App\Http\Controllers\UsuarioController::class,'create'])->middleware(['auth']);
