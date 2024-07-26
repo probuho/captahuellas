@@ -33,15 +33,15 @@ class UsuarioController extends Controller
         ]);
 
         // Crear un nuevo usuario
-        $usuario = new Usuario($request->all());
+        $usuario = new Usuario($request->except(['foto', 'huella_dactilar']));
 
         // Manejar la carga de archivos
         if ($request->hasFile('foto')) {
-            $usuario->foto = file_get_contents($request->file('foto')->getRealPath());
+            $usuario->foto = base64_encode(file_get_contents($request->file('foto')->getRealPath()));
         }
 
         if ($request->hasFile('huella_dactilar')) {
-            $usuario->huella_dactilar = file_get_contents($request->file('huella_dactilar')->getRealPath());
+            $usuario->huella_dactilar = base64_encode(file_get_contents($request->file('huella_dactilar')->getRealPath()));
         }
 
         $usuario->save();
