@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Usuario extends Model
 {
-    //Utiliza la tabla trabajadores, donde se almacena la informacion total
     protected $table = 'trabajadores';
     use HasFactory;
     protected $fillable = [
@@ -15,16 +14,14 @@ class Usuario extends Model
         'segundo_nombre',
         'primer_apellido',
         'segundo_apellido',
-        'Direccion',
+        'direccion',
         'telefono',
         'email',
         'gerencia_general',
         'foto',
-        'fecha_ingreso',
+        'fecha_nac',
         'p00',
         'correo_corporativo',
         'huella_dactilar'
     ];
-
 }
-

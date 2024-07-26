@@ -2406,3 +2406,940 @@ C:\Users\aruizc01\Documents\GitHub\captahuellas\resources\views\auth\login.blade
                             @error('email')
 
                             <span class="invalid-feedback" role="alert">
+
+
+
+PS C:\laragon\www\captahuellas> php artisan
+Laravel Framework 11.6.0
+
+Usage:
+  command [options] [arguments]
+
+Options:
+  -h, --help            Display help for the given command. When no command is given display help for the list command
+
+
+  -q, --quiet           Do not output any message
+
+
+  -V, --version         Display this application version
+
+      --ansi|--no-ansi  Force (or disable --no-ansi) ANSI output
+
+  -n, --no-interaction  Do not ask any interactive question
+
+      --env[=ENV]       The environment the command should run under
+
+  -v|vv|vvv, --verbose  Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug
+
+Available commands:
+  about                     Display basic information about your application
+  clear-compiled            Remove the compiled class file
+  completion                Dump the shell completion script
+  db                        Start a new database CLI session
+  docs                      Access the Laravel documentation
+  down                      Put the application into maintenance / demo mode
+  env                       Display the current framework environment
+  help                      Display help for a command
+  inspire                   Display an inspiring quote
+  list                      List commands
+  migrate                   Run the database migrations
+  optimize                  Cache framework bootstrap, configuration, and metadata to increase performance
+  serve                     Serve the application on the PHP development server
+  test                      Run the application tests
+  tinker                    Interact with your application
+  ui                        Swap the front-end scaffolding for the application
+  up                        Bring the application out of maintenance mode
+ auth
+  auth:clear-resets         Flush expired password reset tokens
+ cache
+  cache:clear               Flush the application cache
+  cache:forget              Remove an item from the cache
+  cache:prune-stale-tags    Prune stale cache tags from the cache (Redis only)
+ channel
+  channel:list              List all registered private broadcast channels
+ config
+  config:cache              Create a cache file for faster configuration loading
+  config:clear              Remove the configuration cache file
+  config:publish            Publish configuration files to your application
+  config:show               Display all of the values for a given configuration file
+ db
+  db:monitor                Monitor the number of connections on the specified database
+  db:seed                   Seed the database with records
+  db:show                   Display information about the given database
+  db:table                  Display information about the given database table
+  db:wipe                   Drop all tables, views, and types
+ env
+  env:decrypt               Decrypt an environment file
+  env:encrypt               Encrypt an environment file
+ event
+  event:cache               Discover and cache the application's events and listeners
+  event:clear               Clear all cached events and listeners
+  event:list                List the application's events and listeners
+ install
+  install:api               Create an API routes file and install Laravel Sanctum or Laravel Passport
+  install:broadcasting      Create a broadcasting channel routes file
+ key
+  key:generate              Set the application key
+ lang
+  lang:publish              Publish all language files that are available for customization
+ make
+  php artisan make:cache-table          [cache:table] Create a migration for the cache database table
+  php artisan make:cast                 Create a new custom Eloquent cast class
+  php artisan make:channel              Create a new channel class
+  php artisan make:class                Create a new class
+  php artisan make:command              Create a new Artisan command
+  php artisan make:component            Create a new view component class
+  php artisan make:controller           Create a new controller class
+  php artisan make:enum                 Create a new enum
+  php artisan make:event                Create a new event class
+  php artisan make:exception            Create a new custom exception class
+  php artisan make:factory              Create a new model factory
+  php artisan make:interface            Create a new interface
+  php artisan make:job                  Create a new job class
+  php artisan make:listener             Create a new event listener class
+  php artisan make:mail                 Create a new email class
+  php artisan make:middleware           Create a new middleware class
+  php artisan make:migration            Create a new migration file
+  php artisan make:model                Create a new Eloquent model class
+  php artisan make:notification         Create a new notification class
+  php artisan make:notifications-table  [notifications:table] Create a migration for the notifications table
+  php artisan make:observer             Create a new observer class
+  php artisan make:policy               Create a new policy class
+  php artisan make:provider             Create a new service provider class
+  php artisan make:queue-batches-table  [queue:batches-table] Create a migration for the batches database table
+  php artisan make:queue-failed-table   [queue:failed-table] Create a migration for the failed queue jobs database table
+  php artisan make:queue-table          [queue:table] Create a migration for the queue jobs database table
+  php artisan make:request              Create a new form request class
+  php artisan make:resource             Create a new resource
+  php artisan make:rule                 Create a new validation rule
+  php artisan make:scope                Create a new scope class
+  php artisan make:seeder               Create a new seeder class
+  php artisan make:session-table        [session:table] Create a migration for the session database table
+  php artisan make:test                 Create a new test class
+  php artisan make:trait                Create a new trait
+  php artisan make:view                 Create a new view
+ migrate
+  migrate:fresh             Drop all tables and re-run all migrations
+  migrate:install           Create the migration repository
+  migrate:refresh           Reset and re-run all migrations
+  migrate:reset             Rollback all database migrations
+  migrate:rollback          Rollback the last database migration
+  migrate:status            Show the status of each migration
+ model
+  model:prune               Prune models that are no longer needed
+  model:show                Show information about an Eloquent model
+ optimize
+  optimize:clear            Remove the cached bootstrap files
+ package
+  package:discover          Rebuild the cached package manifest
+ queue
+  queue:clear               Delete all of the jobs from the specified queue
+  queue:failed              List all of the failed queue jobs
+  queue:flush               Flush all of the failed queue jobs
+  queue:forget              Delete a failed queue job
+  queue:listen              Listen to a given queue
+  queue:monitor             Monitor the size of the specified queues
+  queue:prune-batches       Prune stale entries from the batches database
+  queue:prune-failed        Prune stale entries from the failed jobs table
+  queue:restart             Restart queue worker daemons after their current job
+  queue:retry               Retry a failed queue job
+  queue:retry-batch         Retry the failed jobs for a batch
+  queue:work                Start processing jobs on the queue as a daemon
+ route
+  php artisan route:cache               Create a route cache file for faster route registration
+  php artisan route:clear               Remove the route cache file
+  php artisan route:list                List all registered routes
+ sail
+  sail:add                  Add a service to an existing Sail installation
+  sail:install              Install Laravel Sail's default Docker Compose file
+  sail:publish              Publish the Laravel Sail Docker files
+ schedule
+  schedule:clear-cache      Delete the cached mutex files created by scheduler
+  schedule:interrupt        Interrupt the current schedule run
+  schedule:list             List all scheduled tasks
+  schedule:run              Run the scheduled commands
+  schedule:test             Run a scheduled command
+  schedule:work             Start the schedule worker
+ schema
+  schema:dump               Dump the given database schema
+ storage
+  storage:link              Create the symbolic links configured for the application
+  storage:unlink            Delete existing symbolic links configured for the application
+ stub
+  stub:publish              Publish all stubs that are available for customization
+ ui
+  ui:auth                   Scaffold basic login and registration views and routes
+  ui:controllers            Scaffold the authentication controllers
+ vendor
+  vendor:publish            Publish any publishable assets from vendor packages
+ view
+  view:cache                Compile all of the application's Blade templates
+  view:clear                Clear all compiled view files
+
+
+  PS C:\laragon\www\captahuellas> php artisan route:list
+
+   ReflectionException
+
+  Class "UsuarioController" does not exist
+
+  at vendor\laravel\framework\src\Illuminate\Foundation\Console\RouteListCommand.php:229
+    225▕             if ($this->isFrameworkController($route)) {
+    226▕                 return false;
+    227▕             }
+    228▕
+  ➜ 229▕             $path = (new ReflectionClass($route->getControllerClass()))
+    230▕                                 ->getFileName();
+    231▕         } else {
+    232▕             return false;
+    233▕         }
+
+  1   vendor\laravel\framework\src\Illuminate\Foundation\Console\RouteListCommand.php:229
+      ReflectionClass::__construct("UsuarioController")
+
+  2   vendor\laravel\framework\src\Illuminate\Foundation\Console\RouteListCommand.php:147
+      Illuminate\Foundation\Console\RouteListCommand::isVendorRoute(Object(Illuminate\Routing\Route))
+
+PS C:\laragon\www\captahuellas>
+
+
+Generated optimized autoload files containing 6062 classes
+PS C:\laragon\www\captahuellas> php artisan route:list
+
+  GET|HEAD        / ....................................................................................................
+  POST            _ignition/execute-solution ignition.executeSolution › Spatie\LaravelIgnition › ExecuteSolutionControl…
+  GET|HEAD        _ignition/health-check ......... ignition.healthCheck › Spatie\LaravelIgnition › HealthCheckController
+  POST            _ignition/update-config ...... ignition.updateConfig › Spatie\LaravelIgnition › UpdateConfigController
+  GET|HEAD        home ..................................................................... home › HomeController@index
+  GET|HEAD        login ..................................................... login › Auth\LoginController@showLoginForm
+  POST            login ..................................................................... Auth\LoginController@login
+  POST            logout .......................................................... logout › Auth\LoginController@logout
+  GET|HEAD        password/confirm ................... password.confirm › Auth\ConfirmPasswordController@showConfirmForm
+  POST            password/confirm .............................................. Auth\ConfirmPasswordController@confirm
+  POST            password/email ..................... password.email › Auth\ForgotPasswordController@sendResetLinkEmail
+  GET|HEAD        password/reset .................. password.request › Auth\ForgotPasswordController@showLinkRequestForm
+  POST            password/reset .................................. password.update › Auth\ResetPasswordController@reset
+  GET|HEAD        password/reset/{token} ................... password.reset › Auth\ResetPasswordController@showResetForm
+  GET|HEAD        up ...................................................................................................
+  GET|POST|HEAD   usuario ...................................................................... UsuarioController@store
+  GET|HEAD        usuarios .................................................... usuarios.index › UsuarioController@index
+  POST            usuarios .................................................... usuarios.store › UsuarioController@store
+  GET|HEAD        usuarios/create ......................................................................................
+  GET|HEAD        usuarios/{usuario} ............................................ usuarios.show › UsuarioController@show
+  PUT|PATCH       usuarios/{usuario} ........................................ usuarios.update › UsuarioController@update
+  DELETE          usuarios/{usuario} ...................................... usuarios.destroy › UsuarioController@destroy
+  GET|HEAD        usuarios/{usuario}/edit ....................................... usuarios.edit › UsuarioController@edit
+
+                                                                                                     Showing [23] routes
+
+PS C:\laragon\www\captahuellas>
+
+
+PS C:\laragon\www> initdb -D C:\laragon\data\postgresql-16.3
+Los archivos de este cluster serán de propiedad del usuario «aruizc01».
+Este usuario también debe ser quien ejecute el proceso servidor.
+
+El cluster será inicializado con configuración regional «Spanish_Venezuela.1252».
+La codificación por omisión ha sido por lo tanto definida a «WIN1252».
+La configuración de búsqueda en texto ha sido definida a «spanish».
+
+Las sumas de verificación en páginas de datos han sido desactivadas.
+
+initdb: error: el directorio «C:/laragon/data/postgresql-16.3» existe pero no está vacío
+initdb: consejo: Si quiere crear un nuevo cluster de bases de datos, elimine o vacíe el directorio «C:/laragon/data/postgresql-16.3», o ejecute initdb con un argumento distinto de «C:/laragon/data/postgresql-16.3».
+PS C:\laragon\www>
+
+Para configurar y asegurar el correcto funcionamiento de PostgreSQL en Laragon, primero necesitamos resolver el problema con la inicialización del cluster de bases de datos y luego asegurarnos de que Laragon pueda iniciar el servicio de PostgreSQL sin problemas. Aquí hay un paso a paso detallado:
+
+Paso 1: Solucionar el Problema del Cluster
+El mensaje de error indica que el directorio C:/laragon/data/postgresql-16.3 existe pero no está vacío. Para inicializar un nuevo cluster de bases de datos, debemos asegurarnos de que el directorio esté vacío o usar un directorio diferente.
+
+Opción 1: Vaciar el Directorio Existente
+Vacía el directorio:
+
+Navega a C:/laragon/data/postgresql-16.3 y elimina todos los archivos y subdirectorios dentro de él.
+Asegúrate de que el directorio esté completamente vacío.
+Reinicia la inicialización:
+
+Ejecuta el siguiente comando en tu terminal:
+bash
+Copiar código
+initdb -D C:\laragon\data\postgresql-16.3
+Opción 2: Usar un Directorio Diferente
+Elige un directorio diferente:
+
+Elige una ruta diferente para inicializar el cluster. Por ejemplo, podrías usar C:\laragon\data\postgresql-16.3-new.
+Inicializa el cluster en el nuevo directorio:
+
+Ejecuta el siguiente comando en tu terminal:
+bash
+Copiar código
+initdb -D C:\laragon\data\postgresql-16.3-new
+Paso 2: Configuración en Laragon
+Configurar PostgreSQL en Laragon:
+
+Abre el archivo C:\laragon\etc\apps.ini (si no existe, créalo).
+Agregar la configuración de PostgreSQL:
+
+Añade la siguiente configuración al archivo apps.ini:
+
+ini                               Copiar código
+```console
+[postgresql-16.3]
+exe = C:\laragon\bin\postgresql-16.3\bin\pg_ctl.exe
+init = initdb -D C:\laragon\data\postgresql-16.3
+start = pg_ctl -D C:\laragon\data\postgresql-16.3 -l logfile start
+stop = pg_ctl -D C:\laragon\data\postgresql-16.3 -l logfile stop
+install = C:\laragon\bin\postgresql-16.3\setup.exe
+```
+
+Verificar la configuración del servicio:
+
+Asegúrate de que la ruta a pg_ctl.exe y a los directorios de datos sean correctas y existan en tu sistema.
+Paso 3: Iniciar PostgreSQL desde el Panel de Laragon
+Abrir el panel de Laragon:
+
+Abre Laragon y ve a la pestaña Database.
+Iniciar el servicio de PostgreSQL:
+
+En la lista de servicios, selecciona postgresql-16.3 y haz clic en Start.
+Resultado Esperado
+
+**Caso Exitoso:**
+
+Si todo está configurado correctamente, deberías ver un mensaje en el panel de Laragon indicando que PostgreSQL se ha iniciado correctamente. El texto del servicio aparecerá en verde.
+
+Puedes verificar que PostgreSQL está corriendo abriendo pgAdmin o usando la línea de comandos para conectarte a la base de datos.
+
+Caso de Error:
+Si hay un error, el mensaje en el panel de Laragon se mostrará en rojo. Podría ser algo similar a:
+
+# "Cannot initialize data, please try again! pg_ctl: el directorio 1/2C:laragon/data/postgresql-16+ no es un directorio de base de datos"
+
+Revisa los logs para obtener más detalles sobre el error y asegúrate de que las rutas y permisos sean correctos.
+
+Solución
+
+1. Vacía o utiliza un nuevo directorio para la inicialización del cluster de PostgreSQL.
+2. Configura correctamente PostgreSQL en el archivo apps.ini de Laragon.
+3. Inicia PostgreSQL desde el panel de Laragon y verifica que se inicie sin errores.
+
+Si sigues estos pasos detallados y específicos, deberías poder configurar y ejecutar PostgreSQL correctamente en Laragon.
+
+------------------------------------------------------------------------------
+
+como puedo hacer con cmd o powershell para que en el directorio actual emita un archivo con el arbol de directorios y archivos existentes dentro del mismo con windows 10
+Para generar un archivo con el árbol de directorios y archivos existentes dentro del directorio actual en Windows 10, puedes usar el comando tree en CMD (Símbolo del sistema) o PowerShell. Aquí te muestro cómo hacerlo en ambos:
+
+En CMD (Símbolo del sistema)
+Abre CMD y navega hasta el directorio deseado usando el comando cd.
+Ejecuta el siguiente comando:
+tree /f /a > tree.txt
+Este comando genera un archivo llamado tree.txt en el directorio actual, el cual contiene el árbol de directorios y archivos. La opción /f incluye los archivos en el árbol, y la opción /a usa caracteres ASCII en lugar de caracteres extendidos.
+
+En PowerShell
+Abre PowerShell y navega hasta el directorio deseado usando el comando cd.
+Ejecuta el siguiente comando:
+tree /f /a | Out-File -FilePath .\tree.txt -Encoding ASCII
+Este comando hace lo mismo que el anterior pero en PowerShell, generando un archivo tree.txt en el directorio actual con el árbol de directorios y archivos. La parte | Out-File -FilePath .\tree.txt -Encoding ASCII redirige la salida del comando tree al archivo tree.txt, asegurando que se use codificación ASCII para la compatibilidad.
+
+Ambos métodos te proporcionarán un archivo de texto tree.txt con la estructura de carpetas y archivos del directorio actual.
+
+
+hola que puedo hacer con este error de laravel:
+
+Illuminate
+ \ 
+Database
+ \ 
+QueryException
+PHP 8.2.4
+11.6.0
+SQLSTATE[22P02]: Invalid text representation: 7 ERROR: sintaxis de entrada no válida para tipo bytea CONTEXT: portal sin nombre, parámetro 10 = '...'
+insert into "trabajadores" ("p00", "primer_nombre", "segundo_nombre", "primer_apellido", "segundo_apellido", "telefono", "correo_corporativo", "fecha_nac", "gerencia_general", "huella_dactilar", "foto", "updated_at", "created_at") values (214060, Antonio, Jose, Ruiz, Canchica, 4245977038, antonio.ruiz@movilnet.com.ve, 1994-03-24, GGSTI, C:\Users\aruizc01\AppData\Local\Temp\php1669.tmp, C:\Users\aruizc01\AppData\Local\Temp\php166A.tmp, 2024-07-26 19:54:54, 2024-07-26 19:54:54) returning "id"
+
+
+
+Expand vendor frames
+10 vendor frames
+App
+ \ 
+Http
+ \ 
+Controllers
+ \ 
+UsuarioController
+ 
+: 29
+store
+47 vendor frames
+C:\laragon\www\captahuellas\app\Http\Controllers\UsuarioController
+.php
+ 
+: 29
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+use App\Models\Usuario;
+
+use Illuminate\Http\Request;
+
+
+
+class UsuarioController extends Controller
+
+{
+
+    public function index()
+
+    {
+
+        $usuarios = Usuario::all();
+
+        return view('usuarios.index', compact('usuarios'));
+
+    }
+
+
+
+    public function create()
+
+    {
+
+        return view('usuarios.create');
+
+    }
+
+
+
+    public function store(Request $request)
+
+    {
+
+        // $usuario = new Usuario($request->all());
+
+        // $usuario->save();
+
+        // return response()->json($usuario);
+
+        //Envio de los datos del formulario
+
+        //$usuario = Usuario::create($request->all());
+
+        $usuario = new Usuario($request->all());
+
+        $usuario->save();
+
+        return redirect()->route('usuarios.index')->with('mensaje', 'Usuario creado con exito');
+
+    }
+
+}
+
+arguments
+$options:array
+[]
+
+App
+Routing
+Request
+Browser
+Headers
+Body
+Context
+User
+Versions
+Exception
+App
+Routing
+Controller
+App\Http\Controllers\UsuarioController@store
+
+Middleware
+web
+
+auth
+
+Request
+http://localhost/captahuellas/public/usuario
+POST
+curl "http://localhost/captahuellas/public/usuario" \
+   -X POST \
+   -H 'host: localhost' \
+   -H 'connection: keep-alive' \
+   -H 'content-length: 276691' \
+   -H 'cache-control: max-age=0' \
+   -H 'sec-ch-ua: "Not)A;Brand";v="99", "Google Chrome";v="127", "Chromium";v="127"' \
+   -H 'sec-ch-ua-mobile: ?0' \
+   -H 'sec-ch-ua-platform: "Windows"' \
+   -H 'dnt: 1' \
+   -H 'upgrade-insecure-requests: 1' \
+   -H 'user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36' \
+   -H 'origin: http://localhost' \
+   -H 'content-type: multipart/form-data; boundary=----WebKitFormBoundarytAD6d4k0DBiPEuBT' \
+   -H 'accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7' \
+   -H 'sec-fetch-site: same-origin' \
+   -H 'sec-fetch-mode: navigate' \
+   -H 'sec-fetch-user: ?1' \
+   -H 'sec-fetch-dest: document' \
+   -H 'referer: http://localhost/captahuellas/public/usuarios/create' \
+   -H 'accept-encoding: gzip, deflate, br, zstd' \
+   -H 'accept-language: es-US,es-419;q=0.9,es;q=0.8' \
+   -H 'cookie: <CENSORED>' \
+   -F '_token=SmbgCMXI6u89ES30mQ8mKUhPJVEbQFgflq8OmRBG' -F 'p00=214060' -F 'primer_nombre=Antonio' -F 'segundo_nombre=Jose' -F 'primer_apellido=Ruiz' -F 'segundo_apellido=Canchica' -F 'direccion=av. San martin' -F 'telefono=4245977038' -F 'correo=contactoprobuho@gmail.com' -F 'correo_corporativo=antonio.ruiz@movilnet.com.ve' -F 'fecha_nac=1994-03-24' -F 'gerencia_general=GGSTI'
+
+
+Browser
+Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36
+
+Headers
+host
+localhost
+
+connection
+keep-alive
+
+content-length
+276691
+
+cache-control
+max-age=0
+
+sec-ch-ua
+"Not)A;Brand";v="99", "Google Chrome";v="127", "Chromium";v="127"
+
+sec-ch-ua-mobile
+?0
+
+sec-ch-ua-platform
+"Windows"
+
+dnt
+1
+
+upgrade-insecure-requests
+1
+
+user-agent
+Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36
+
+origin
+http://localhost
+
+content-type
+multipart/form-data; boundary=----WebKitFormBoundarytAD6d4k0DBiPEuBT
+
+accept
+text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+
+sec-fetch-site
+same-origin
+
+sec-fetch-mode
+navigate
+
+sec-fetch-user
+?1
+
+sec-fetch-dest
+document
+
+referer
+http://localhost/captahuellas/public/usuarios/create
+
+accept-encoding
+gzip, deflate, br, zstd
+
+accept-language
+es-US,es-419;q=0.9,es;q=0.8
+
+cookie
+<CENSORED>
+
+Body
+{
+    "_token": "SmbgCMXI6u89ES30mQ8mKUhPJVEbQFgflq8OmRBG",
+    "p00": "214060",
+    "primer_nombre": "Antonio",
+    "segundo_nombre": "Jose",
+    "primer_apellido": "Ruiz",
+    "segundo_apellido": "Canchica",
+    "direccion": "av. San martin",
+    "telefono": "4245977038",
+    "correo": "contactoprobuho@gmail.com",
+    "correo_corporativo": "antonio.ruiz@movilnet.com.ve",
+    "fecha_nac": "1994-03-24",
+    "gerencia_general": "GGSTI"
+}
+
+
+Context
+User
+contactoprobuho@gmail.com
+administrador
+
+contactoprobuho@gmail.com
+
+{
+    "id": 3,
+    "name": "administrador",
+    "email": "contactoprobuho@gmail.com",
+    "email_verified_at": "2024-07-22T10:03:05.000000Z",
+    "created_at": "2024-07-22T14:02:48.000000Z",
+    "updated_at": "2024-07-22T14:02:48.000000Z",
+    "approved": true
+}
+
+Versions
+Php Version
+8.2.4
+
+Laravel Version
+11.6.0
+
+Laravel Locale
+en
+
+Laravel Config Cached
+false
+App Debug
+true
+App Env
+local
+
+Exception
+Raw Sql
+insert into "trabajadores" ("p00", "primer_nombre", "segundo_nombre", "primer_apellido", "segundo_apellido", "telefono", "correo_corporativo", "fecha_nac", "gerencia_general", "huella_dactilar", "foto", "updated_at", "created_at") values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) returning "id"
+
+
+2
+Queries
+15:54:52
+3282.32ms
+pgsql
+select * from "sessions" where "id" = dKxqOEgVEzYpmiOAhNgRQkDS98gJaTRaGSU7HJdU limit 1
+
+
+1 query parameter
+15:54:53
+61.44ms
+pgsql
+select * from "users" where "id" = 3 limit 1
+
+
+1 query parameter
+
+
+aqui esta el codigo de la vista create.blade.php
+
+@extends('layouts.admin')
+@section('content')
+    <div class="d-flex justify-content-between align-items-center mb-3" style="margin-left: 20px">
+        <h1>Agregar nuevo...</h1>
+    </div>
+    <div class="content" style="margin-left: 20px">
+        <div class="row">
+            <div class="col-md-11">
+                <div class="card card-outline card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title"><b>Agregar nuevo trabajador</b></h3>
+                    </div>
+                    <form action="{{ url('usuario')}}" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        <div class="row">
+                            <div class="card-body" style="...">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="p00">P00</label> <b style="color: red">*</b>
+                                            <input type="number" name="p00" class="form-control" id="id" maxlength="6"required>
+                                            <small>Coloque 6 caracteres numericos</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="primer_nombre">Primer nombre</label> <b style="color: red">*</b>
+                                            <input type="text" name="primer_nombre" class="form-control" id="primer_nombre">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="segundo_nombre">Segundo Nombre</label>
+                                            <input type="text" name="segundo_nombre" class="form-control" id="segundo_nombre">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="primer_apellido">Primer Apellido</label> <b style="color: red">*</b>
+                                            <input type="text" name="primer_apellido" class="form-control" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="segundo_apellido">Segundo Apellido</label>
+                                            <input type="text" name="segundo_apellido" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="direccion">Dirección</label> <b style="color: red">*</b>
+                                            <input type="text" name="direccion" class="form-control" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="telefono">Telefono</label> <b style="color: red">*</b>
+                                            <input type="tel" name="telefono" class="form-control" required>
+                                            <small>Ejemplo: 416XXXXXXX</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="correo">Correo</label>
+                                            <input type="email" name="correo" class="form-control">
+                                            <small>Campo opcional</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="correo_corporativo">Correo laboral</label> <b style="color: red">*</b>
+                                            <input type="email" name="correo_corporativo" class="form-control">
+                                            <small>Ejemplo: usuario@cantv.com.ve o usuario.ejemplo@movilnet.com.ve</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="huella_dactilar">Huella dactilar</label>
+                                            <input id="huella_dactilar" type="file" name="huella_dactilar" class="form-control">
+                                            <center><output id="list"></output></center>
+                                            <script>
+                                                function archivo(evt) {
+                                                    var files = evt.target.files;
+                                                    //obtenemos la imagen del campo "file".
+                                                    for (var i = 0, f; f = files[i]; i++) {
+                                                        //solo admitimos imagenes.
+                                                        if (!f.type.match('image.*')) {
+                                                            continue;
+                                                        }
+                                                        var reader = new FileReader();
+                                                        reader.onload = (function(theFile) {
+                                                            return function(e) {
+                                                                //insertamos la imagen
+                                                                document.getElementById("list").innerHTML = ['<img class="thumb thumbnail" src="', e
+                                                                    .target.result, '"width="50%" title="', escape(theFile.name), '"/>'
+                                                                ].join('');
+                                                            };
+                                                        })(f);
+                                                        reader.readAsDataURL(f);
+                                                    }
+
+                                                }
+                                                document.getElementById('file').addEventListener('change', archivo, false);
+                                            </script>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="foto">Foto</label>
+                                            <input id="foto" type="file" name="foto" class="form-control">
+                                            <center><output id="list"></output></center>
+                                            <script>
+                                                function archivo(evt) {
+                                                    var files = evt.target.files;
+                                                    //obtenemos la imagen del campo "file".
+                                                    for (var i = 0, f; f = files[i]; i++) {
+                                                        //solo admitimos imagenes.
+                                                        if (!f.type.match('image.*')) {
+                                                            continue;
+                                                        }
+                                                        var reader = new FileReader();
+                                                        reader.onload = (function(theFile) {
+                                                            return function(e) {
+                                                                //insertamos la imagen
+                                                                document.getElementById("list").innerHTML = ['<img class="thumb thumbnail" src="', e
+                                                                    .target.result, '"width="50%" title="', escape(theFile.name), '"/>'
+                                                                ].join('');
+                                                            };
+                                                        })(f);
+                                                        reader.readAsDataURL(f);
+                                                    }
+
+                                                }
+                                                document.getElementById('file').addEventListener('change', archivo, false);
+                                            </script>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="fecha_nac">Fecha de Nacimiento</label>
+                                            <input type="date" name="fecha_nac" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="gerencia_general">Gerencia General</label>
+                                                    <select name="gerencia_general" id="gerencia_general" class="form-control">
+                                                        <option value="GGSTI">Gerencia General de Soporte TI</option>
+                                                </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <a href="" class="btn btn-secondary">Cancelar</a>
+                                            <button type="submit" class="btn btn-primary">Guardar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>
+@endsection()
+
+aqui el codigo de mi modelo Usuario.php
+
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class Usuario extends Model
+{
+    //Utiliza la tabla trabajadores, donde se almacena la informacion total
+    protected $table = 'trabajadores';
+    use HasFactory;
+    protected $fillable = [
+        'primer_nombre',
+        'segundo_nombre',
+        'primer_apellido',
+        'segundo_apellido',
+        'Direccion',
+        'telefono',
+        'email',
+        'gerencia_general',
+        'foto',
+        'fecha_nac',
+        'p00',
+        'correo_corporativo',
+        'huella_dactilar'
+    ];
+
+}
+
+asi el codigo de la migracion :
+
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration {
+    /**
+     * Run the migrations.
+     */
+
+    public function up(): void
+    {
+        Schema::create('trabajadores', function (Blueprint $table) {
+            $table->id();
+            $table->integer('p00');
+            $table->string('primer_nombre');
+            $table->string('segundo_nombre')->nullable();
+            $table->string('primer_apellido');
+            $table->string('segundo_apellido')->nullable();
+            $table->string('direccion')->nullable();
+            $table->string('telefono')->nullable();
+            $table->string('email')->nullable();
+            $table->string('correo_corporativo')->nullable();
+            $table->string('gerencia_general')->nullable();
+            $table->binary('foto')->nullable(); // Verifica que esta línea exista
+            $table->binary('huella_dactilar')->nullable();
+            $table->date('fecha_nac')->nullable();
+            $table->timestamps();
+        });
+    }
+
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('trabajadores');
+    }
+};
+
+ y asi el codigo de el controlador "UsuarioController.php"
+
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Usuario;
+use Illuminate\Http\Request;
+
+class UsuarioController extends Controller
+{
+    public function index()
+    {
+        $usuarios = Usuario::all();
+        return view('usuarios.index', compact('usuarios'));
+    }
+
+    public function create()
+    {
+        return view('usuarios.create');
+    }
+
+    public function store(Request $request)
+    {
+        $usuario = new Usuario($request->all());
+        $usuario->save();
+        return redirect()->route('usuarios.index')->with('mensaje', 'Usuario creado con exito');
+    }
+}
+
+
+

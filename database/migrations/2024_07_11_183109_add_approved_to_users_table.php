@@ -8,20 +8,20 @@ return new class extends Migration {
     /**
      * Run the migrations.
      */
-    public function up()
-    {
-        Schema::table('users', function (Blueprint $table) {
-            $table->boolean('approved')->default(false);
-        });
-    }
+    // public function up()
+    // {
+    //     Schema::table('users', function (Blueprint $table) {
+    //         $table->boolean('approved')->default(false);
+    //     });
+    // }
 
-    /**
-     * Reverse the migrations.
-     */
-    public function down()
-    {
-        Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('approved');
-        });
-    }
+    // /**
+    //  * Reverse the migrations.
+    //  */
+    // public function down()
+    // {
+    //     Schema::table('users', function (Blueprint $table) {
+    //         $table->dropColumn('approved');
+    //     });
+    // }
 };
